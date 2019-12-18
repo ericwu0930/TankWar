@@ -2,3 +2,6 @@
 initTankCount=10
 tankSpeed=5
 bulletSpeed=10
+#fireStrategy
+goodFS=com.eric.tank.FireClassTwo
+badFS=com.eric.tank.FireClassOne

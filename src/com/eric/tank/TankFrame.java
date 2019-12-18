@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.List;
 
 public class TankFrame extends Frame {
-    Tank myTank=new Tank(GAME_WIDTH/2,GAME_HEIGHT/2,Direction.DOWN,this,Group.GOOD,new FireClassTwo());
+    Tank myTank=new Tank(GAME_WIDTH/2,GAME_HEIGHT/2,Direction.DOWN,this,Group.GOOD);
     List<Bullet> bullets=new LinkedList<>();
     List<Tank> tanks=new LinkedList<>();
     List<Explode> explodes=new LinkedList<>();
@@ -50,7 +50,7 @@ public class TankFrame extends Frame {
         }
     }
 
-    public TankFrame() throws HeadlessException {
+    public TankFrame() throws HeadlessException, IllegalAccessException, InstantiationException, ClassNotFoundException {
         setSize(GAME_WIDTH,GAME_HEIGHT);
         setResizable(false);
         setTitle("tank war");;

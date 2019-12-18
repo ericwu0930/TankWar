@@ -47,21 +47,26 @@ public class Tank {
         return y;
     }
 
-    public Tank(int x, int y, Direction dir, TankFrame tf, Group group, FireBehaviour fire) {
+    public Tank(int x, int y, Direction dir, TankFrame tf,Group group ) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
         this.group = group;
+        this.tf = tf;
 
-        rect.x = this.x;
-        rect.y = this.y;
-        rect.height = this.HEIGHT;
-        rect.width = this.WIDTH;
+        rect.x=this.x;
+        rect.y=this.y;
+        rect.height=this.HEIGHT;
+        rect.width=this.WIDTH;
 
-        liveTime = System.currentTimeMillis();
-        this.fire = fire;
+        if(group==Group.GOOD){
+            fire=(FireBehaviour) Class.forName(PropertyMgr.get("goodFS")).newInstance();
+
+        }else{
+            fire=(FireBehaviour) Class.forName(PropertyMgr.get("badFS")).newInstance();
+        }
     }
+
 
     public void setDir(Direction dir) {
         this.dir = dir;
