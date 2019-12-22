@@ -1,10 +1,11 @@
-package com.eric.tank;
+package factory;
 
-import factory.BaseExplode;
+import com.eric.tank.ResourceMgr;
+import com.eric.tank.TankFrame;
 
 import java.awt.*;
 
-public class Explode extends BaseExplode {
+public class PixelStyleExplode extends BaseExplode {
     public static ResourceMgr res=ResourceMgr.INSTANCE;
     public static int WIDTH=res.explodes[0].getWidth();
     public static int HEIGHT=res.explodes[0].getHeight();
@@ -12,16 +13,20 @@ public class Explode extends BaseExplode {
     private int step=0;
     TankFrame tf=null;
 
-    public Explode(int x, int y,TankFrame tf ) {
+    public PixelStyleExplode(int x, int y,TankFrame tf ) {
         this.x = x;
         this.y = y;
         this.step = step;
         this.tf=tf;
     }
-    @Override
+
     public void paint(Graphics g){
-        g.drawImage(res.explodes[step++],x,y,null);
-        if(step>=res.explodes.length)
+        Color c=g.getColor();
+        g.setColor(Color.RED);
+        g.fillRect(x,y,10*step,10*step);
+        step++;
+        g.setColor(c);
+        if(step>=15)
             tf.explodes.remove(this);
     }
 }

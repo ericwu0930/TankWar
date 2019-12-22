@@ -5,3 +5,4 @@ bulletSpeed=10
 #fireStrategy
 goodFS=com.eric.tank.FireClassTwo
 badFS=com.eric.tank.FireClassOne
+theme=factory.PixelStyleFactory

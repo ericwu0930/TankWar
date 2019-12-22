@@ -1,9 +1,13 @@
 package com.eric.tank;
 
+import factory.BaseTank;
+
+
+
 public class FireClassOne implements FireBehaviour{
 
     @Override
-    public void fire(Tank t) {
+    public void fire(BaseTank t) {
         int positionX = 0;
         int positionY = 0;
         switch (t.getDir()) {
@@ -24,6 +28,6 @@ public class FireClassOne implements FireBehaviour{
                 positionY = t.getY() + Tank.getHEIGHT();
                 break;
         }
-        new Bullet(positionX,positionY,t.getDir(),true,t.getTf(),t.getGroup());
+        t.getTf().factory.createBullet(positionX,positionY,t.getDir(),true,t.getTf(),t.getGroup());
     }
 }

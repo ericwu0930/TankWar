@@ -1,15 +1,13 @@
-package com.eric.tank;
+package factory;
 
-import factory.BaseBullet;
-import factory.BaseTank;
+import com.eric.tank.*;
 
 import java.awt.*;
 
-public class Bullet extends BaseBullet {
+public class PixelStyleBullet extends BaseBullet {
     private static final int SPEED=20;
-    private static final ResourceMgr res=ResourceMgr.INSTANCE;
-    private static final int WIDTH=res.bulletD.getWidth();
-    private static final int HEIGHT=res.bulletD.getHeight();
+    private static final int WIDTH=10;
+    private static final int HEIGHT=10;
     private Group group=Group.BAD;
 
     Rectangle rect=new Rectangle();
@@ -28,7 +26,7 @@ public class Bullet extends BaseBullet {
     private int x,y;
     private Direction dir;
 
-    public Bullet(int x, int y, Direction dir,boolean live, TankFrame tf,Group group) {
+    public PixelStyleBullet(int x, int y, Direction dir,boolean live, TankFrame tf,Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -49,20 +47,9 @@ public class Bullet extends BaseBullet {
         if(!live) {
             tf.bullets.remove(this);
         }else{
-            switch(dir){
-                case LEFT:
-                    g.drawImage(res.bulletL,x,y,null);
-                    break;
-                case RIGHT:
-                    g.drawImage(res.bulletR,x,y,null);
-                    break;
-                case UP:
-                    g.drawImage(res.bulletU,x,y,null);
-                    break;
-                case DOWN:
-                    g.drawImage(res.bulletD,x,y,null);
-                    break;
-            }
+            Color c=g.getColor();
+            g.setColor(Color.WHITE);
+            g.fillRect(x,y,WIDTH,HEIGHT);
             move();
         }
     }
@@ -88,10 +75,9 @@ public class Bullet extends BaseBullet {
             live=false;
         }
     }
-    @Override
+    //TODO:坦克之间可以碾压
     public void collideWith(BaseTank tank) {
         if(this.group== tank.getGroup()) return;
-
         Rectangle rect1=this.rect;
         Rectangle rect2=tank.getRect();
         if(rect1.intersects(rect2)){

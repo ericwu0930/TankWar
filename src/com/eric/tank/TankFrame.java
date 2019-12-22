@@ -1,5 +1,7 @@
 package com.eric.tank;
 
+import factory.*;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -9,11 +11,13 @@ import java.util.*;
 import java.util.List;
 
 public class TankFrame extends Frame {
-    Tank myTank=new Tank(GAME_WIDTH/2,GAME_HEIGHT/2,Direction.DOWN,this,Group.GOOD);
-    List<Bullet> bullets=new LinkedList<>();
-    List<Tank> tanks=new LinkedList<>();
-    List<Explode> explodes=new LinkedList<>();
-    static final int GAME_WIDTH=1000,GAME_HEIGHT=900;
+    public List<BaseBullet> bullets=new LinkedList<>();
+    public List<BaseTank> tanks=new LinkedList<>();
+    public List<BaseExplode> explodes=new LinkedList<>();
+    public AbstractFactory factory=(AbstractFactory) Class.forName(PropertyMgr.get("theme")).newInstance();
+    public static final int GAME_WIDTH=1000,GAME_HEIGHT=900;
+    BaseTank myTank=factory.createTank(GAME_WIDTH/2,GAME_HEIGHT/2,Direction.DOWN,this,Group.GOOD);
+
 
 
     Image offScreenImage = null;
@@ -48,6 +52,7 @@ public class TankFrame extends Frame {
         for(int i=0;i<explodes.size();++i){
             explodes.get(i).paint(g);
         }
+        System.out.println(bullets.size());
     }
 
     public TankFrame() throws HeadlessException, IllegalAccessException, InstantiationException, ClassNotFoundException {

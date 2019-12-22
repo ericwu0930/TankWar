@@ -12,9 +12,14 @@ public enum ResourceMgr {
     public BufferedImage badTankL, badTankU, badTankR, badTankD;
     public BufferedImage bulletL,bulletU,bulletR,bulletD;
     public BufferedImage[] explodes=new BufferedImage[16];
+    public BufferedImage pixelTankL,pixelTankR,pixelTankU,pixelTankD;
     private ResourceMgr() {
         try {
-            //TODO:坦克动态
+            pixelTankD=ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankD.gif"));
+            pixelTankU=ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankU.gif"));
+            pixelTankL=ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
+            pixelTankR=ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankR.gif"));
+
             goodTankU1= ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/GoodTank1.png"));
             goodTankL1= ImageUtil.rotateImage(goodTankU1,-90);
             goodTankR1= ImageUtil.rotateImage(goodTankU1,90);

@@ -1,12 +1,14 @@
 package com.eric.tank;
 
+import factory.BaseTank;
+
 public class FireClassTwo implements FireBehaviour {
 
     @Override
-    public void fire(Tank t) {
+    public void fire(BaseTank t) {
         Direction dirs[]=Direction.values();
         for(Direction i:dirs){
-            new Bullet(t.getX()+Tank.getWIDTH()/2,t.getY()+Tank.getHEIGHT()/2,i,true,t.getTf(),t.getGroup());
+            t.getTf().factory.createBullet(t.getX()+Tank.getWIDTH()/2,t.getY()+Tank.getHEIGHT()/2,i,true,t.getTf(),t.getGroup());
         }
     }
 }

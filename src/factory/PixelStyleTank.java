@@ -1,20 +1,22 @@
-package com.eric.tank;
+package factory;
 
-import com.eric.tank.Direction;
-import factory.BaseTank;
+import com.eric.tank.*;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.nio.Buffer;
-import java.util.ArrayList;
 import java.util.Random;
 
-public class Tank extends BaseTank {
+public class PixelStyleTank extends BaseTank {
     private int x, y;
     private Direction dir = Direction.DOWN;
     private boolean live = true;
     private Random random = new Random();
     private Rectangle rect = new Rectangle();
+
+    @Override
+    public Rectangle getRect() {
+        return rect;
+    }
+
     private long liveTime;
     private FireBehaviour fire = null;
 
@@ -48,7 +50,7 @@ public class Tank extends BaseTank {
         return y;
     }
 
-    public Tank(int x, int y, Direction dir, TankFrame tf,Group group ) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public PixelStyleTank(int x, int y, Direction dir, TankFrame tf,Group group ) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -114,12 +116,6 @@ public class Tank extends BaseTank {
     private void randomDir() {
         this.dir = Direction.values()[random.nextInt(4)]; //values返回一个数组
     }
-
-    @Override
-    public Rectangle getRect() {
-        return rect;
-    }
-
     @Override
     public void paint(Graphics g) {
         if (!live) {
@@ -128,56 +124,16 @@ public class Tank extends BaseTank {
         }
         switch (dir) {
             case LEFT:
-                if (group == Group.GOOD) {
-                    if (System.currentTimeMillis() - liveTime <= 2000) {
-                        g.drawImage(res.goodTankL1, x, y, null);
-                    } else {
-                        g.drawImage(res.goodTankL2, x, y, null);
-                        if (System.currentTimeMillis() - liveTime >= 4000)
-                            liveTime = System.currentTimeMillis();
-                    }
-                } else {
-                    g.drawImage(res.badTankL, x, y, null);
-                }
+                g.drawImage(res.pixelTankL, x, y, null);
                 break;
             case RIGHT:
-                if (group == Group.GOOD) {
-                    if (System.currentTimeMillis() - liveTime <= 2000) {
-                        g.drawImage(res.goodTankR1, x, y, null);
-                    } else {
-                        g.drawImage(res.goodTankR2, x, y, null);
-                        if (System.currentTimeMillis() - liveTime >= 4000)
-                            liveTime = System.currentTimeMillis();
-                    }
-                } else {
-                    g.drawImage(res.badTankR, x, y, null);
-                }
+                g.drawImage(res.pixelTankR,x,y,null);
                 break;
             case UP:
-                if (group == Group.GOOD) {
-                    if (System.currentTimeMillis() - liveTime <= 2000) {
-                        g.drawImage(res.goodTankU1, x, y, null);
-                    } else {
-                        g.drawImage(res.goodTankU2, x, y, null);
-                        if (System.currentTimeMillis() - liveTime >= 4000)
-                            liveTime = System.currentTimeMillis();
-                    }
-                } else {
-                    g.drawImage(res.badTankU, x, y, null);
-                }
+                g.drawImage(res.pixelTankU,x,y,null);
                 break;
             case DOWN:
-                if (group == Group.GOOD) {
-                    if (System.currentTimeMillis() - liveTime <= 2000) {
-                        g.drawImage(res.goodTankD1, x, y, null);
-                    } else {
-                        g.drawImage(res.goodTankD2, x, y, null);
-                        if (System.currentTimeMillis() - liveTime >= 4000)
-                            liveTime = System.currentTimeMillis();
-                    }
-                } else {
-                    g.drawImage(res.badTankD, x, y, null);
-                }
+                g.drawImage(res.pixelTankD,x,y,null);
                 break;
         }
         move();
