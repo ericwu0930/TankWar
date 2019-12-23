@@ -3,5 +3,7 @@ initTankCount=10
 tankSpeed=5
 bulletSpeed=10
 #fireStrategy
-goodFS=com.eric.tank.FireClassTwo
-badFS=com.eric.tank.FireClassOne
+goodFS=com.eric.tank.strategy.FireClassTwo
+badFS=com.eric.tank.strategy.FireClassOne
+#collidors
+collidors=com.eric.tank.collidor.BulletTankCollidor,com.eric.tank.collidor.TankTankCollidor

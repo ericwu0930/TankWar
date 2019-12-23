@@ -1,15 +1,13 @@
 package com.eric.tank;
 
-import com.eric.tank.Direction;
+import com.eric.tank.strategy.FireBehaviour;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.nio.Buffer;
-import java.util.ArrayList;
 import java.util.Random;
 
-public class Tank {
+public class Tank extends GameObjects{
     private int x, y;
+    private int oldX,oldY;
     private Direction dir = Direction.DOWN;
     private boolean live = true;
     private Random random = new Random();
@@ -23,9 +21,10 @@ public class Tank {
 
     private Group group = Group.BAD;
 
+    GameModel gm;
+
     private static final int SPEED = 5;
     private boolean moving = true;
-    private TankFrame tf = null;
     private static ResourceMgr res = ResourceMgr.INSTANCE;
     private final static int WIDTH = res.goodTankU1.getWidth();
     private final static int HEIGHT = res.goodTankU1.getHeight();
@@ -47,12 +46,12 @@ public class Tank {
         return y;
     }
 
-    public Tank(int x, int y, Direction dir, TankFrame tf,Group group ) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public Tank(int x, int y, Direction dir, GameModel gm,Group group ) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
+        this.gm = gm;
 
         rect.x=this.x;
         rect.y=this.y;
@@ -76,9 +75,15 @@ public class Tank {
         this.moving = moving;
     }
 
+    public Rectangle getRect() {
+        return rect;
+    }
+
     public void move() {
         if (!moving)
             return;
+        oldX=x;
+        oldY=y;
         switch (dir) {
             case LEFT:
                 x -= SPEED;
@@ -116,7 +121,7 @@ public class Tank {
 
     public void paint(Graphics g) {
         if (!live) {
-            tf.tanks.remove(this);
+            gm.remove(this);
             return;
         }
         switch (dir) {
@@ -184,8 +189,8 @@ public class Tank {
         return live;
     }
 
-    public TankFrame getTf() {
-        return tf;
+    public GameModel getGameModel() {
+        return gm;
     }
 
     public void fire() {
@@ -194,5 +199,11 @@ public class Tank {
 
     public void die() {
         live = false;
+    }
+
+    //TODO:反方向
+    public void stop(){
+        x=oldX;
+        y=oldY;
     }
 }

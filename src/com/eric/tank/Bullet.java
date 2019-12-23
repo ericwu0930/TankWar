@@ -2,11 +2,20 @@ package com.eric.tank;
 
 import java.awt.*;
 
-public class Bullet {
+public class Bullet extends GameObjects{
     private static final int SPEED=20;
     private static final ResourceMgr res=ResourceMgr.INSTANCE;
     private static final int WIDTH=res.bulletD.getWidth();
     private static final int HEIGHT=res.bulletD.getHeight();
+
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
     private Group group=Group.BAD;
 
     Rectangle rect=new Rectangle();
@@ -20,17 +29,16 @@ public class Bullet {
     }
 
     private boolean live=true;
-    private TankFrame tf=null;
-
+    GameModel gm=null;
     private int x,y;
     private Direction dir;
 
-    public Bullet(int x, int y, Direction dir,boolean live, TankFrame tf,Group group) {
+    public Bullet(int x, int y, Direction dir,boolean live, GameModel gm,Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.live= live;
-        this.tf=tf;
+        this.gm=gm;
         this.group=group;
 
         rect.x=this.x;
@@ -38,12 +46,12 @@ public class Bullet {
         rect.width=WIDTH;
         rect.height=HEIGHT;
 
-        tf.bullets.add(this);
+        gm.add(this);
     }
 
     public void paint(Graphics g){
         if(!live) {
-            tf.bullets.remove(this);
+            gm.remove(this);
         }else{
             switch(dir){
                 case LEFT:
@@ -84,20 +92,8 @@ public class Bullet {
             live=false;
         }
     }
-    //TODO:坦克之间可以碾压
-    public void collideWith(Tank tank) {
-        if(this.group== tank.getGroup()) return;
 
-        Rectangle rect1=this.rect;
-        Rectangle rect2=tank.rect;
-        if(rect1.intersects(rect2)){
-            tank.die();
-            this.die();
-            tf.explodes.add(new Explode(tank.getX()+Tank.getWIDTH()/2-Explode.WIDTH/2,tank.getY()+Tank.getHEIGHT()/2-Explode.HEIGHT/2,tf));
-        }
-    }
-
-    private void die() {
+    public void die() {
         this.live=false;
     }
 }
