@@ -64,6 +64,8 @@ public class Tank extends GameObjects{
         }else{
             fire=(FireBehaviour) Class.forName(PropertyMgr.get("badFS")).newInstance();
         }
+
+        GameModel.getINSTANCE().add(this);
     }
 
 
@@ -201,8 +203,7 @@ public class Tank extends GameObjects{
         live = false;
     }
 
-    //TODO:反方向
-    public void stop(){
+    public void back(){
         x=oldX;
         y=oldY;
     }

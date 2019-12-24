@@ -6,4 +6,4 @@ bulletSpeed=10
 goodFS=com.eric.tank.strategy.FireClassTwo
 badFS=com.eric.tank.strategy.FireClassOne
 #collidors
-collidors=com.eric.tank.collidor.BulletTankCollidor,com.eric.tank.collidor.TankTankCollidor
+collidors=com.eric.tank.collidor.BulletTankCollidor,com.eric.tank.collidor.TankTankCollidor,com.eric.tank.collidor.BulletBrickCollidor,com.eric.tank.collidor.TankBrickCollidor
