@@ -5,8 +5,8 @@ import java.awt.*;
 public class Bullet extends GameObjects{
     private static final int SPEED=20;
     private static final ResourceMgr res=ResourceMgr.INSTANCE;
-    private static final int WIDTH=res.bulletD.getWidth();
-    private static final int HEIGHT=res.bulletD.getHeight();
+    private int WIDTH=res.bulletD.getWidth();
+    private int HEIGHT=res.bulletD.getHeight();
 
     public Rectangle getRect() {
         return rect;
@@ -16,25 +16,30 @@ public class Bullet extends GameObjects{
         return group;
     }
 
+    public Bullet() {
+    }
+
     private Group group=Group.BAD;
 
     Rectangle rect=new Rectangle();
 
-    public static int getWIDTH() {
+    public int getWIDTH() {
         return WIDTH;
     }
 
-    public static int getHEIGHT() {
+    public int getHEIGHT() {
         return HEIGHT;
     }
 
     private boolean live=true;
-    private int x,y;
+
+
     private Direction dir;
 
     public Bullet(int x, int y, Direction dir,boolean live,Group group) {
-        this.x = x;
-        this.y = y;
+        this.x=x;
+        this.y=y;
+
         this.dir = dir;
         this.live= live;
         this.group=group;

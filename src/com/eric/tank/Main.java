@@ -12,7 +12,7 @@ public class Main  {
             tf.tanks.add(new Tank(50+i*30,200,Direction.DOWN,tf,Group.BAD));
         }
         while(true){
-            Thread.sleep(50);
+            Thread.sleep(500);
             tf.repaint();
         }
     }

@@ -14,6 +14,7 @@ public class Brick extends GameObjects {
         this.rect=new Rectangle(x,y,w,h);
     }
 
+
     public Rectangle getRect() {
         return rect;
     }
@@ -24,5 +25,15 @@ public class Brick extends GameObjects {
         g.setColor(Color.DARK_GRAY);
         g.fillRect(x,y,w,h);
         g.setColor(c);
+    }
+
+    @Override
+    public int getWIDTH() {
+        return w;
+    }
+
+    @Override
+    public int getHEIGHT() {
+        return h;
     }
 }

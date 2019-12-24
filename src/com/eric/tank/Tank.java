@@ -6,14 +6,18 @@ import java.awt.*;
 import java.util.Random;
 
 public class Tank extends GameObjects{
-    private int x, y;
     private int oldX,oldY;
     private Direction dir = Direction.DOWN;
     private boolean live = true;
+
+    public Tank() {
+    }
+
     private Random random = new Random();
     Rectangle rect = new Rectangle();
     private long liveTime;
     private FireBehaviour fire = null;
+
 
     public Group getGroup() {
         return group;
@@ -26,32 +30,25 @@ public class Tank extends GameObjects{
     private static final int SPEED = 5;
     private boolean moving = true;
     private static ResourceMgr res = ResourceMgr.INSTANCE;
-    private final static int WIDTH = res.goodTankU1.getWidth();
-    private final static int HEIGHT = res.goodTankU1.getHeight();
 
+    private int WIDTH=res.goodTankU1.getWidth();
+    private int HEIGHT=res.goodTankU1.getHeight();
 
-    public static int getWIDTH() {
+    public int getWIDTH() {
         return WIDTH;
     }
 
-    public static int getHEIGHT() {
+    public int getHEIGHT() {
         return HEIGHT;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public Tank(int x, int y, Direction dir, GameModel gm,Group group ) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        this.x = x;
-        this.y = y;
+    public Tank(int x, int y, Direction dir, GameModel gm, Group group ) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        this.x=x;
+        this.y=y;
         this.dir = dir;
         this.group = group;
         this.gm = gm;
+
 
         rect.x=this.x;
         rect.y=this.y;
@@ -113,8 +110,8 @@ public class Tank extends GameObjects{
     private void boundCheck() {
         if (this.x < 0) x = 0;
         if (this.y < 30) y = 30;
-        if (this.x > TankFrame.GAME_WIDTH - Tank.getWIDTH()) x = TankFrame.GAME_WIDTH - Tank.getWIDTH();
-        if (this.y > TankFrame.GAME_HEIGHT - Tank.getHEIGHT()) y = TankFrame.GAME_HEIGHT - Tank.getHEIGHT();
+        if (this.x > TankFrame.GAME_WIDTH - this.WIDTH) x = TankFrame.GAME_WIDTH - this.WIDTH;
+        if (this.y > TankFrame.GAME_HEIGHT - this.HEIGHT) y = TankFrame.GAME_HEIGHT - this.HEIGHT;
     }
 
     private void randomDir() {
